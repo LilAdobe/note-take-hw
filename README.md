@@ -8,8 +8,8 @@ Note taker homework saving notes.
 
 ## Links
 - [Github](https://github.com/LilAdobe/note-take-hw)
-- [deployed site](https://liladobe.github.io/note-take-hw/)
+- [Heroku](https://floating-spire-69545.herokuapp.com/)
 
 ## screenshot
 
-<img src="assets/capforhw.PNG">
+<img src="./assets/capforhw.png">
