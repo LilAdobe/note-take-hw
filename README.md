@@ -2,9 +2,9 @@
 Note taker homework saving notes.
 
 ##
-* created server and port 3001
-* added a html .js that connects to the pages together
-* deployed webage, and soon heroku
+* created server and port 3001 along with routes.
+* fixed my server.js in order to add notes to the website.
+* deployed webage correctly to HEROKU
 
 ## Links
 - [Github](https://github.com/LilAdobe/note-take-hw)
