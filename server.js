@@ -1,8 +1,7 @@
 const express = require('express');
-const db = require('./db/db.json');
 const path = require('path');
 const fs = require('fs');
-const uuid =require('./uuid/uuid')
+const uuid = require('./uuid/uuid')
 
 
 const PORT = process.env.PORT || 3001;
@@ -18,22 +17,59 @@ app.get("/notes", (req, res) => {
   res.sendFile(path.join(__dirname, "./public/notes.html"))
 });
 
-app.get("*", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "./public/index.html"))
 });
 
-
-
 app.get("/api/notes", (req, res) => {
-  res.json(db)
+  fs.readFile('./db/db.json', 'utf8',
+    (err, data) => {
+      if (err) {
+        console.error(err);
+      } else {
+        const parsedNote = JSON.parse(data);
+
+        res.json(parsedNote)
+      }
+    }
+  )
 });
 
+
+//act 20 server app.post
 app.post("/api/notes", (req, res) => {
+  const { title, text } = req.body;
+  try {
 
-  fs.writeFileSync('db/db.json', JSON.stringify(db))
+    const note = {
+      title,
+      text,
+      note_id: uuid(),
+    };
+    fs.readFile('./db/db.json', 'utf8',
+      (err, data) => {
+        if (err) {
+          console.error(err);
+        } else {
+          const parsedNote = JSON.parse(data);
+          console.log(parsedNote)
+          parsedNote.push(note);
 
-  res.json("new note")
+          fs.writeFileSync('./db/db.json', JSON.stringify(parsedNote))
+
+          res.json("new note")
+        }
+      }
+    )
+  } catch (err) {
+    console.log(err)
+  }
 })
+
+app.listen(PORT, () =>
+  console.log(`App listening at http://localhost:${PORT} 🚀`)
+);
+
 
 
 // app.delete("/api/notes/:id", (req, res)=> {
@@ -41,9 +77,6 @@ app.post("/api/notes", (req, res) => {
 // }
 // )
 
-app.listen(PORT, () =>
-  console.log(`App listening at http://localhost:${PORT} 🚀`)
-);
 
 // pulled from activity 17
 // module.exports = () =>
