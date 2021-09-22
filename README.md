@@ -12,4 +12,4 @@ Note taker homework saving notes.
 
 ## screenshot
 
-<img src="./assets/capforhw.png">
+<img src="newassets/capforhw.png">
